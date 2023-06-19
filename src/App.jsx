@@ -8,10 +8,19 @@ function App() {
     setTodoInput(event.target.value);
   }
 
+  function handleClick() {
+    const newTodos = [...todos, todoInput];
+    setTodos(newTodos);
+    setTodoInput("");
+  }
+
   return (
     <div>
       <input type="text" value={todoInput} onChange={handleChange} />
-      {todos.map((todo, i) => <p key={i}>{todo}</p>)}
+      <button onClick={handleClick}>追加</button>
+      {todos.map((todo, i) => (
+        <p key={i}>{todo}</p>
+      ))}
     </div>
   );
 }
