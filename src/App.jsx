@@ -18,12 +18,20 @@ function App() {
     setTodoInput("");
   }
 
+  function handleDelete(id) {
+    const newTodos = todos.filter((todo) => todo.id !== id);
+    setTodos(newTodos);
+  }
+
   return (
     <div>
       <input type="text" value={todoInput} onChange={handleChange} />
       <button onClick={handleClick}>追加</button>
       {todos.map((todo) => (
-        <p key={todo.id}>{todo}</p>
+        <p key={todo.id}>
+          {todo.title}
+          <button onClick={() => handleDelete(todo.id)}>削除</button>
+        </p>
       ))}
     </div>
   );
