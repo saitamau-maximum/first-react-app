@@ -3,9 +3,9 @@ import { useState } from "react";
 function App() {
   const [todoInput, setTodoInput] = useState("");
   const [todos, setTodos] = useState([
-    { id: 1, title: "掃除" },
-    { id: 2, title: "洗濯" },
-    { id: 3, title: "買い物" },
+    { id: 1, title: "掃除", done: false },
+    { id: 2, title: "洗濯", done: false },
+    { id: 3, title: "買い物", done: false },
   ]);
 
   function handleChange(event) {
@@ -23,6 +23,17 @@ function App() {
     setTodos(newTodos);
   }
 
+  function handleDone(id) {
+    const newTodos = todos.map((todo) => {
+      if (todo.id === id) {
+        // idが一致するtodoのdoneを反転させる
+        todo.done = !todo.done;
+      }
+      return todo;
+    });
+    setTodos(newTodos);
+  }
+
   return (
     <div>
       <input type="text" value={todoInput} onChange={handleChange} />
@@ -30,6 +41,9 @@ function App() {
       {todos.map((todo) => (
         <p key={todo.id}>
           {todo.title}
+          <button onClick={() => handleDone(todo.id)}>
+            {todo.done ? "X" : "O"}
+          </button>
           <button onClick={() => handleDelete(todo.id)}>削除</button>
         </p>
       ))}
