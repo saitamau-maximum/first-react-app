@@ -34,10 +34,24 @@ function App() {
     setTodos(newTodos);
   }
 
+  function handleSort() {
+    const newTodos = [...todos].sort((a, b) => {
+      if (a.done === b.done) {
+        return 0;
+      }
+      if (a.done) {
+        return 1;
+      }
+      return -1;
+    });
+    setTodos(newTodos);
+  }
+
   return (
     <div>
       <input type="text" value={todoInput} onChange={handleChange} />
       <button onClick={handleClick}>追加</button>
+      <button onClick={handleSort}>未完了を上に</button>
       {todos.map((todo) => (
         <p key={todo.id}>
           {todo.title}
